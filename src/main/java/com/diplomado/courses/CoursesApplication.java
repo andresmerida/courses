@@ -16,15 +16,9 @@ import java.net.UnknownHostException;
 import java.util.Optional;
 
 @SpringBootApplication
-public class CoursesApplication implements ApplicationRunner {
+public class CoursesApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(CoursesApplication.class);
-
-	private final StudentRepository studentRepository;
-
-	public CoursesApplication(StudentRepository studentRepository) {
-		this.studentRepository = studentRepository;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication(CoursesApplication.class);
@@ -64,10 +58,5 @@ public class CoursesApplication implements ApplicationRunner {
 				contextPath,
 				env.getActiveProfiles()
 		);
-	}
-
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		studentRepository.save(new Student("Andres", "Merida", "amerida@gmail.com", 37));
 	}
 }
