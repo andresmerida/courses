@@ -13,6 +13,7 @@ public class Book {
     @SequenceGenerator(name = "book_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_sequence")
     private Integer id;
+
     private String name;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
