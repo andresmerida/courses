@@ -1,7 +1,7 @@
 package com.diplomado.courses.services.implement;
 
 import com.diplomado.courses.domain.entities.Enrollment;
-import com.diplomado.courses.repositories.EnrollmentRepository;
+import com.diplomado.courses.repositories.spring.data.EnrollmentRepository;
 import com.diplomado.courses.services.EnrollmentService;
 import org.springframework.stereotype.Service;
 
