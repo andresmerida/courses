@@ -1,12 +1,8 @@
 package com.diplomado.courses;
 
-import com.diplomado.courses.domain.entities.Student;
-import com.diplomado.courses.repositories.StudentRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;

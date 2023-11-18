@@ -1,6 +1,7 @@
 package com.diplomado.courses.web.rest;
 
 import com.diplomado.courses.dto.CourseDTO;
+import com.diplomado.courses.dto.CourseStudentDTO;
 import com.diplomado.courses.services.CourseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,11 @@ public class CourseController {
     @GetMapping
     public ResponseEntity<List<CourseDTO>> listAllCourses() {
         return ResponseEntity.ok().body(courseService.listCourses());
+    }
+
+    @GetMapping("/{courseId}/students")
+    public ResponseEntity<List<CourseStudentDTO>> listStudentsByCourseId(@PathVariable final Integer courseId) {
+        return ResponseEntity.ok().body(courseService.listStudentsByCourseId(courseId));
     }
 
     @PostMapping

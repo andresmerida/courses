@@ -1,7 +1,7 @@
 package com.diplomado.courses.services.implement;
 
 import com.diplomado.courses.domain.entities.Book;
-import com.diplomado.courses.repositories.BookRepository;
+import com.diplomado.courses.repositories.spring.data.BookRepository;
 import com.diplomado.courses.services.BookService;
 import org.springframework.stereotype.Service;
 
