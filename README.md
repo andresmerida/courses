@@ -6,3 +6,6 @@
 - dev_course_db
 - qa_course_db
 - prod_course_db
+
+# You can see all services implemented on this swagger url
+http://localhost:8080/swagger-ui/index.html
