@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/v1/students")
@@ -45,10 +46,25 @@ public class StudentController {
         return ResponseEntity.created(new URI("/v1/students/" + studentDB.getId())).body(studentDB);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDTO> editStudent(@RequestBody final StudentDTO dto,
+                                                @PathVariable final Integer id) throws URISyntaxException {
+        if (dto.getId() == null) {
+            throw new IllegalArgumentException("Invalid student id, null value");
+        }
+        if (!Objects.equals(dto.getId(), id)) {
+            throw new IllegalArgumentException("Invalid id");
+        }
+
+        return ResponseEntity
+                .ok()
+                .body(this.studentService.save(dto));
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable final Integer id) {
+    public ResponseEntity<Void> logicalDelete(@PathVariable final Integer id) {
         studentService.delete(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }

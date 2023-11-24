@@ -15,6 +15,7 @@ public class StudentDTO {
     private String email;
     private Integer age;
 
+    private Long cardNumberId;
     private String cardNumber;
 
     public StudentDTO() {

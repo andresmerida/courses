@@ -16,15 +16,17 @@ public class Student {
     private String lastName;
     private String email;
     private Integer age;
+    private Boolean active;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private StudentIdCard studentIdCard;
 
-    public Student(String firstName, String lastName, String email, Integer age) {
+    public Student(String firstName, String lastName, String email, Integer age, Boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.age = age;
+        this.active = active;
     }
 
     public Student() {
@@ -69,6 +71,14 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public StudentIdCard getStudentIdCard() {

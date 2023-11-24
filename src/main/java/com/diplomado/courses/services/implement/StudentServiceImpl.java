@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(readOnly = true)
     public List<StudentDTO> listStudents() {
-        return studentRepository.findAll()
+        return studentRepository.findAllByActiveOrderByFirstNameAscLastNameAsc(Boolean.TRUE)
                 .stream()
                 .map(studentMapper::toDto).collect(Collectors.toList());
     }
@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(readOnly = true)
     public List<StudentDTO> listStudentsDetailed() {
-        return studentRepository.findAll()
+        return studentRepository.findAllByActiveOrderByFirstNameAscLastNameAsc(Boolean.TRUE)
                 .stream()
                 .map(studentMapper::toDtoDetailed).collect(Collectors.toList());
     }
@@ -48,7 +48,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentDTO save(StudentDTO dto) {
         Student student = studentRepository.save(studentMapper.toEntity(dto));
-        studentIdCardRepository.save(new StudentIdCard(dto.getCardNumber(), student));
+        if (dto.getId() != null) { // edit
+            StudentIdCard studentIdCard = new StudentIdCard();
+            studentIdCard.setId(dto.getCardNumberId());
+            studentIdCard.setCardNumber(dto.getCardNumber());
+            studentIdCard.setStudent(student);
+            studentIdCardRepository.save(studentIdCard);
+        } else { // create
+            studentIdCardRepository.save(new StudentIdCard(dto.getCardNumber(), student));
+        }
         return studentMapper.toDto(student);
     }
 
@@ -60,6 +68,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void delete(Integer id) {
-        studentRepository.deleteById(id);
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Student with id: " + id + " is not existed."));
+        student.setActive(Boolean.FALSE);
+        studentRepository.save(student);
     }
 }
